@@ -1,23 +1,27 @@
 
 import { Tabs } from 'expo-router';
 import { MessageSquare } from 'lucide-react-native';
+import { View } from 'react-native';
 import { ThemeToggle } from '~/components/ThemeToggle';
 import { Home } from '~/lib/icons/Home';
-import { Search } from '~/lib/icons/Search';
 import { User } from '~/lib/icons/User';
 import { Users } from '~/lib/icons/Users';
 
 export default function TabsLayout() {
     return (
+
         <Tabs
             screenOptions={{
                 headerTitleAlign: 'left',
                 tabBarActiveTintColor: '#3b82f6', // This is tailwind's blue-500
                 tabBarInactiveTintColor: 'gray',
-                // Optional: You can also style the tab bar
                 tabBarStyle: {
-                    // Any additional styles for the tab bar
-                }
+                    //backgroundColor: "#f7f7f7"
+                },
+                headerStyle: {
+                    //backgroundColor: "#f7f7f7"
+                },
+
             }}
         >
             <Tabs.Screen
@@ -26,16 +30,6 @@ export default function TabsLayout() {
                     title: 'Home',
                     tabBarIcon({ color, size }) {
                         return <Home color={color} size={size} />;
-                    },
-                    headerRight: () => <ThemeToggle />,
-                }}
-            />
-            <Tabs.Screen
-                name='discover'
-                options={{
-                    title: 'Scopri',
-                    tabBarIcon({ color, size }) {
-                        return <Search color={color} size={size} />;
                     },
                     headerRight: () => <ThemeToggle />,
                 }}
@@ -71,5 +65,6 @@ export default function TabsLayout() {
                 }}
             />
         </Tabs>
+
     );
 }
