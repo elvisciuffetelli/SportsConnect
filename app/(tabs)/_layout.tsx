@@ -1,45 +1,75 @@
+
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { MessageSquare } from 'lucide-react-native';
+import { ThemeToggle } from '~/components/ThemeToggle';
+import { Home } from '~/lib/icons/Home';
+import { Search } from '~/lib/icons/Search';
+import { User } from '~/lib/icons/User';
+import { Users } from '~/lib/icons/Users';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+export default function TabsLayout() {
+    return (
+        <Tabs
+            screenOptions={{
+                headerTitleAlign: 'left',
+                tabBarActiveTintColor: '#3b82f6', // This is tailwind's blue-500
+                tabBarInactiveTintColor: 'gray',
+                // Optional: You can also style the tab bar
+                tabBarStyle: {
+                    // Any additional styles for the tab bar
+                }
+            }}
+        >
+            <Tabs.Screen
+                name='index'
+                options={{
+                    title: 'Home',
+                    tabBarIcon({ color, size }) {
+                        return <Home color={color} size={size} />;
+                    },
+                    headerRight: () => <ThemeToggle />,
+                }}
+            />
+            <Tabs.Screen
+                name='discover'
+                options={{
+                    title: 'Scopri',
+                    tabBarIcon({ color, size }) {
+                        return <Search color={color} size={size} />;
+                    },
+                    headerRight: () => <ThemeToggle />,
+                }}
+            />
+            <Tabs.Screen
+                name='social'
+                options={{
+                    title: 'Social',
+                    tabBarIcon({ color, size }) {
+                        return <Users color={color} size={size} />;
+                    },
+                    headerRight: () => <ThemeToggle />,
+                }}
+            />
+            <Tabs.Screen
+                name='messages'
+                options={{
+                    title: 'Chat',
+                    tabBarIcon({ color, size }) {
+                        return <MessageSquare color={color} size={size} />;
+                    },
+                    headerRight: () => <ThemeToggle />,
+                }}
+            />
+            <Tabs.Screen
+                name='profile'
+                options={{
+                    title: 'Profilo',
+                    tabBarIcon({ color, size }) {
+                        return <User color={color} size={size} />;
+                    },
+                    headerRight: () => <ThemeToggle />,
+                }}
+            />
+        </Tabs>
+    );
 }
