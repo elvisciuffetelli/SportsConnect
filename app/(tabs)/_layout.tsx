@@ -4,6 +4,7 @@ import { MessageSquare } from 'lucide-react-native';
 import { View } from 'react-native';
 import { ThemeToggle } from '~/components/ThemeToggle';
 import { Home } from '~/lib/icons/Home';
+import { Search } from '~/lib/icons/Search';
 import { User } from '~/lib/icons/User';
 import { Users } from '~/lib/icons/Users';
 
@@ -30,6 +31,16 @@ export default function TabsLayout() {
                     title: 'Home',
                     tabBarIcon({ color, size }) {
                         return <Home color={color} size={size} />;
+                    },
+                    headerRight: () => <ThemeToggle />,
+                }}
+            />
+            <Tabs.Screen
+                name='discover'
+                options={{
+                    title: 'Scopri',
+                    tabBarIcon({ color, size }) {
+                        return <Search color={color} size={size} />;
                     },
                     headerRight: () => <ThemeToggle />,
                 }}
